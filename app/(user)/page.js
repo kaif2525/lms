@@ -5,7 +5,7 @@ import { React, useEffect, useState } from "react";
 import CourseCard from "./components/CourseCard";
 import CategoryHeader from "./components/CategoryHeader";
 import LearningProgress from "./components/LearningProgress";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 
 function SearchBar({ searchTerm, handleSearch }) {
@@ -62,7 +62,7 @@ function UserDropdown({
       </div>
       {showDropdown && (
         <div className="absolute top-8 right-[1px]  w-32 bg-white shadow-lg rounded-lg p-2 transition-all duration-300 ease-in-out">
-          <button className="text-red-500" onClick={handleSignOut}>
+          <button className="text-red-500" onClick={signOut}>
             Sign Out
           </button>
         </div>

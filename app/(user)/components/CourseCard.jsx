@@ -4,16 +4,24 @@ import React, { useState } from "react";
 import { ArrowRight } from "react-feather";
 import Link from "next/link";
 import { Modal } from "antd";
+import { useSession } from "next-auth/react";
 
 function CourseCard({ imageUrl, title, description, href }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
+  const [isLoginRequired, setIsLoginRequired] = useState(false);
+  const { data: session, status } = useSession();
 
   const handleEnroll = () => {
-    setIsEnrolling(true);
+    if (session) {
+      setIsEnrolling(true);
+    } else {
+      setIsLoginRequired(true);
+    }
   };
 
   const handleCancel = () => {
     setIsEnrolling(false);
+    setIsLoginRequired(false);
   };
 
   return (
@@ -51,7 +59,6 @@ function CourseCard({ imageUrl, title, description, href }) {
       <Modal
         title="Enroll in Course"
         open={isEnrolling}
-        onCancel={handleCancel}
         footer={null}
         centered // Add the centered prop
       >
@@ -62,6 +69,30 @@ function CourseCard({ imageUrl, title, description, href }) {
             className="bg-[#1d4ed8] text-white rounded-md px-4 py-2 mr-2"
           >
             Enroll
+          </Link>
+          <button
+            onClick={handleCancel}
+            className="bg-[#787b7e] text-white rounded-md px-4 py-2"
+          >
+            Cancel
+          </button>
+        </div>
+      </Modal>
+
+      <Modal
+        title="Enroll in Course"
+        open={isLoginRequired}
+        onCancel={handleCancel}
+        footer={null}
+        centered // Add the centered prop
+      >
+        <p>Login Required!</p>
+        <div className="flex justify-end mt-4">
+          <Link
+            href="/login"
+            className="bg-[#1d4ed8] text-white rounded-md px-4 py-2 mr-2"
+          >
+            Login
           </Link>
           <button className="bg-[#787b7e] text-white rounded-md px-4 py-2">
             Cancel

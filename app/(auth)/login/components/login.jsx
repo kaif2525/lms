@@ -61,7 +61,7 @@ function Login() {
         <p className="text-white">Enter your credentials below.</p>
       </div>
       <div className="flex flex-col mt-1">
-        <div className="w-full relative group">
+        <div className="w-full relative group mt-2">
           <User className="absolute mt-3 ml-2 text-white" />
           <input
             type="text"
@@ -77,7 +77,7 @@ function Login() {
               username ? "top" : ""
             }`}
           >
-            Username
+            Email
           </label>
         </div>
         {usernameError && (
