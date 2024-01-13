@@ -38,7 +38,7 @@ function ChapterSIdeNav(Course) {
   const handleSubMenuClick = (index) => {
     setActiveSubMenu(index === activeSubMenu ? null : index);
   };
-  const name = Course?.Course.name?.split("-")[0];
+  const name = Course?.Course?.name?.split("-")[0];
 
   return (
     <div className="flex flex-col h-[97%] rounded-md mb-3 mt-4 w-[20%] bg-[#111111] border-[#21232b] border">

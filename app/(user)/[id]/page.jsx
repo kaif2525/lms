@@ -28,7 +28,7 @@ function CourseDashboard({ params }) {
     fetchData();
   }, []);
 
-  if (params.id < 0 || params.id > 18) {
+  if (typeof params.id === "string" || params.id < 0 || params.id > 18) {
     return notFound();
   } else {
     return (
