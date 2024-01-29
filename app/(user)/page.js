@@ -7,7 +7,6 @@ import CategoryHeader from "./components/CategoryHeader";
 import LearningProgress from "./components/LearningProgress";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
-np;
 
 function SearchBar({ searchTerm, handleSearch }) {
   return (
