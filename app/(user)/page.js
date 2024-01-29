@@ -118,9 +118,18 @@ function CourseList({
             const [title, description] = course.name.split("-");
             const href = "/" + index;
             let imageSRC = "/" + course.name + ".png";
-            if (course.name === "Interview Preperation C++ -CodingNinjas") {
-              imageSRC = "/Interview Preperation Cpp-CodingNinjas.png";
+            switch (course.name) {
+              case "Interview Preperation C++ -CodingNinjas":
+                imageSRC = "/Interview Preperation Cpp-CodingNinjas.png";
+                break;
+              case "Introduction to C++ -CodingNinjas":
+                imageSRC = "/Introduction to Cpp-CodingNinjas.png";
+                break;
+              case "DSA in C++":
+                imageSRC = "/DSA in Cpp.png";
+                break;
             }
+
             return (
               <CourseCard
                 key={index}
