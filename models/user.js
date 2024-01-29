@@ -16,6 +16,9 @@ const userSchema = new Schema(
     },
     courses: [
       {
+        courseId: {
+          type: String,
+        },
         courseName: {
           type: String,
           required: true,

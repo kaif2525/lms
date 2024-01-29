@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req) {
   try {
-    const { email, CourseName, checkORadd } = await req.json();
+    const { email, CourseName, checkORadd, id } = await req.json();
     await connectMongoDB();
     const user = await User.findOne({ email });
     const isEnrolled = await user.courses.some(
@@ -16,6 +16,7 @@ export async function POST(req) {
         return NextResponse.json({ message: "Not Enrolled" }, { status: 200 });
       } else {
         const course = await user.courses.push({
+          courseId: id,
           courseName: CourseName,
           progress: 0,
         });
