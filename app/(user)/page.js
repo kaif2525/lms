@@ -117,12 +117,16 @@ function CourseList({
           .map((course, index) => {
             const [title, description] = course.name.split("-");
             const href = "/" + index;
+            let imageSRC = "/" + course.name + ".png";
+            if (course.name === "Interview Preperation C++ -CodingNinjas") {
+              imageSRC = "/Interview Preperation Cpp-CodingNinjas.png";
+            }
             return (
               <CourseCard
                 key={index}
                 title={title}
                 description={description}
-                imageUrl={"/" + course.name + ".png"}
+                imageUrl={imageSRC}
                 href={href}
               />
             );
