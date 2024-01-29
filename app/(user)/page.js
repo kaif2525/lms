@@ -7,6 +7,7 @@ import CategoryHeader from "./components/CategoryHeader";
 import LearningProgress from "./components/LearningProgress";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+np;
 
 function SearchBar({ searchTerm, handleSearch }) {
   return (
@@ -139,7 +140,7 @@ function Home() {
   const [rotateChevron, setRotateChevron] = useState(false);
   const [CourseData, setCourseData] = useState([]);
   const { data: session, status } = useSession();
-  const [active, setActive] = useState("");NO
+  const [active, setActive] = useState("");
 
   const handleSearch = (event) => {
     console.log(session);
