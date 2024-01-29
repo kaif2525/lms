@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSession } from "next-auth/react";
 
-function ProgressBar({ progressData }) {
+function ProgressBar() {
+  const { data: session } = useSession();
+  const [progressData, setProgressData] = useState([]);
+
+  const getProgress = async () => {
+    const res = await fetch("api/getProgress", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: session.user.email,
+      }),
+    });
+    const data = await res.json();
+    setProgressData(data.userCourses);
+    console.log(data.userCourses[0].progress);
+  };
+
+  useEffect(() => {
+    if (session) {
+      console.log(session);
+      getProgress();
+    }
+  }, [session]);
+
   const materialColors = [
     {
       from: "#f44336",

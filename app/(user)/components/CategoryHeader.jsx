@@ -1,20 +1,26 @@
 import React from "react";
 
-function CategoryHeader() {
+function CategoryHeader({ setActive, active }) {
   const category = [
     "All",
-    "Software Development",
-    "Web Development",
+    "GeeksForGeeks",
+    "Coding Ninjas",
     "Mobile Development",
-    "Game Development",
-    "Data Science",
-    "Machine Learning",
+    "DSA",
+    "Aptitude",
+    "Web Development",
   ];
+
   return (
     <div className="scrollbar border h-14 border-[#21232b] border-t-0 md:flex hidden lg:flex overflow-y-scroll flex-row justify-between items-center">
       {category.map((item) => (
         <div className="px-4" key={item}>
-          <button className="hover:text-blue-500 text-xs text-[#787b7e]">
+          <button
+            onClick={() => setActive(item)}
+            className={`hover:text-blue-500 text-xs ${
+              active === item ? "text-blue-500" : "text-gray-400"
+            }`}
+          >
             {item}
           </button>
         </div>

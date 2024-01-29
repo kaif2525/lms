@@ -3,11 +3,15 @@ import "./style.css";
 import getDemoData from "./demodata";
 import { ArrowLeft, CheckCircle } from "react-feather";
 import useActiveVideoStore from "@/store/ActiveVideoStore";
+import Link from "next/link";
+
 function BackButton() {
   return (
     <div className="flex flex-row border border-[#21232b] rounded-md p-4 m-4">
-      <ArrowLeft color="grey" />
-      <h1 className="px-2 text-[#757575]">Back to Dashboard</h1>
+      <Link href="/" className="flex flex-row">
+        <ArrowLeft color="grey" />
+        <h1 className="px-2 text-[#757575]">Back to Dashboard</h1>
+      </Link>
     </div>
   );
 }

@@ -1,15 +1,18 @@
 "use client";
 
 import React, { useState } from "react";
-import { ArrowRight } from "react-feather";
+import { ArrowRight, Check, Smile } from "react-feather";
 import Link from "next/link";
-import { Modal } from "antd";
+import { Modal, notification, message } from "antd";
+import { SmileOutlined } from "@ant-design/icons";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 function CourseCard({ imageUrl, title, description, href }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
   const [isLoginRequired, setIsLoginRequired] = useState(false);
   const { data: session, status } = useSession();
+  const router = useRouter();
 
   const handleEnroll = () => {
     if (session) {
@@ -22,6 +25,69 @@ function CourseCard({ imageUrl, title, description, href }) {
   const handleCancel = () => {
     setIsEnrolling(false);
     setIsLoginRequired(false);
+  };
+
+  {
+    /*//!!!!!!!!!!!!!!!!!!!!!!!!! ENROLL IN COURSE FUNC */
+  }
+  const EnrollCourse = async (title, href) => {
+    const res = await fetch("api/setCourse", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: session.user.email,
+        CourseName: title,
+        checkORadd: "add",
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.message == "Course added") {
+      message.success("Enrolled Successfully!");
+      handleCancel();
+      router.push(href);
+    }
+  };
+
+  {
+    /*//!!!!!!!!!!!!!!!!!!!!!!!!! CHECK ENROLL COURSE FUNC */
+  }
+  const CheckEnroll = async (title, href) => {
+    const res = await fetch("api/setCourse", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: session.user.email,
+        CourseName: title,
+        checkORadd: "check",
+      }),
+    });
+    const data = await res.json();
+    console.log(data);
+    if (data.message == "Already Enrolled") {
+      console.log(title);
+      notification.open({
+        duration: 1.5,
+        className: "bg-[#1d4ed8]",
+        icon: <SmileOutlined style={{ color: "white" }} />,
+        message: (
+          <div>
+            <h1 className="text-white text-lg font-bold">Alredy Enrolled!</h1>
+            <h1 className="text-white font-bold">
+              Redirecting to Course Page...
+            </h1>
+          </div>
+        ),
+      });
+      router.push(href);
+      handleCancel();
+    } else {
+      handleEnroll();
+    }
   };
 
   return (
@@ -48,7 +114,7 @@ function CourseCard({ imageUrl, title, description, href }) {
 
             <div
               className="bg-[#1d4ed8] text-white rounded-md px-4 py-3 ml-auto hover:cursor-pointer"
-              onClick={handleEnroll}
+              onClick={() => CheckEnroll(title, href)}
             >
               <ArrowRight />
             </div>
@@ -59,22 +125,25 @@ function CourseCard({ imageUrl, title, description, href }) {
       <Modal
         title="Enroll in Course"
         open={isEnrolling}
+        onCancel={handleCancel}
         footer={null}
         centered // Add the centered prop
       >
         <p>Are you sure you want to enroll in this course?</p>
         <div className="flex justify-end mt-4">
-          <Link
-            href={href}
-            className="bg-[#1d4ed8] text-white rounded-md px-4 py-2 mr-2"
-          >
-            Enroll
-          </Link>
           <button
             onClick={handleCancel}
-            className="bg-[#787b7e] text-white rounded-md px-4 py-2"
+            className="bg-[#787b7e] text-white rounded-md 
+            px-4 py-2 mr-2"
           >
             Cancel
+          </button>
+          <button
+            onClick={() => EnrollCourse(title, href)}
+            className="bg-[#1d4ed8] text-white rounded-md 
+            px-4 py-2 ml-2"
+          >
+            Enroll
           </button>
         </div>
       </Modal>

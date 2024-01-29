@@ -67,7 +67,8 @@ function Register() {
         const { user } = await resUserExists.json();
 
         if (user) {
-          setError("User already exists.");
+          console.log("User already exists.");
+          setErrors({ email: "Email is already registered" });
           setShowLoader(false); // Set the loader to false if validation fails
           return;
         }
@@ -112,7 +113,7 @@ function Register() {
         <h1 className="text-4xl font-bold text-white">Register</h1>
         <p className="text-white">Create your account below.</p>
       </div>
-      <div className="flex flex-col mt-1">
+      <div className="flex flex-col mt-2">
         <div className="w-full relative group">
           <User className="absolute mt-3 ml-2 text-white" />
           <input

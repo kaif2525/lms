@@ -71,7 +71,36 @@ function UserDropdown({
   );
 }
 //!COURSE LIST START -----------------------------------------------------------------------------------------------
-function CourseList({ CourseData, searchTerm }) {
+function CourseList({
+  CourseData,
+  searchTerm,
+  activeheader,
+  setactive,
+  setSearchTerm,
+}) {
+  const category = [
+    { label: "All", searchTerm: "" },
+    { label: "GeeksForGeeks", searchTerm: "geeksforgeeks" },
+    { label: "Coding Ninjas", searchTerm: "codingninjas" },
+    { label: "Mobile Development", searchTerm: "android" },
+    { label: "DSA", searchTerm: "dsa" },
+    { label: "Aptitude", searchTerm: "aptitude" },
+    { label: "Web Development", searchTerm: "web" },
+  ];
+
+  useEffect(() => {
+    if (activeheader) {
+      const activeCategory = category.find((cat) => cat.label === activeheader);
+      if (activeCategory) {
+        setSearchTerm(activeCategory.searchTerm);
+      }
+    }
+
+    if (searchTerm === "") {
+      setactive("");
+    }
+  }, [activeheader]);
+
   if (!CourseData.files) {
     return (
       <div className="flex justify-center items-center h-full">
@@ -110,22 +139,12 @@ function Home() {
   const [rotateChevron, setRotateChevron] = useState(false);
   const [CourseData, setCourseData] = useState([]);
   const { data: session, status } = useSession();
+  const [active, setActive] = useState("");NO
 
   const handleSearch = (event) => {
     console.log(session);
     setSearchTerm(event.target.value);
   };
-
-  const progressData = [
-    {
-      courseName: "Course 1",
-      progress: 10,
-    },
-    {
-      courseName: "Course 1",
-      progress: 60,
-    },
-  ];
 
   const handleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -170,13 +189,27 @@ function Home() {
       {/* ROW FIRST CONTAINING CATEGORY HEAD AND COURSE CARD */}
       <div className="flex flex-col md:flex-row h-full w-full overflow-hidden ">
         <div className="md:w-[65%] w-full border-top-0 border h-full border-[#21232b]">
-          <CategoryHeader />
-          <CourseList CourseData={CourseData} searchTerm={searchTerm} />
+          <CategoryHeader active={active} setActive={setActive} />
+          <CourseList
+            CourseData={CourseData}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            activeheader={active}
+            setactive={setActive}
+          />
         </div>
         {/* ROW SECOND CONTAINING OTHER ITEMS */}
         <div className="md:flex lg:flex hidden  w-[35%]  flex-col border border-l-0 border-t-0 border-[#21232b] ">
           <div className="flex  h-full justify-center   ">
-            <LearningProgress progressData={progressData} />
+            {session ? (
+              <LearningProgress />
+            ) : (
+              <div className="flex flex-col justify-center items-center h-full">
+                <h1 className="px-10 text-center text-white text-5xl">
+                  Please sign in to track your progress
+                </h1>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -5,7 +5,6 @@ import Head from "./components/head";
 import { useEffect, useState } from "react";
 import ChapterSIdeNav from "./components/ChapterSIdeNav";
 import Mainscreen from "./components/Mainscreen";
-import { set } from "mongoose";
 
 function CourseDashboard({ params }) {
   const [dataIndex, setDataIndex] = useState([null]);

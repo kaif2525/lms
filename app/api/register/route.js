@@ -8,12 +8,17 @@ export async function POST(req) {
     const { name, email, password } = await req.json();
     const hashedPassword = await bcrypt.hash(password, 10);
     await connectMongoDB();
-    await User.create({ name, email, password: hashedPassword });
+    await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      courses: [],
+    });
 
     return NextResponse.json({ message: "User registered." }, { status: 201 });
   } catch (error) {
     return NextResponse.json(
-      { message: "An error occurred while registering the user." },
+      { message: "An error occurred while registering the user." + error },
       { status: 500 }
     );
   }

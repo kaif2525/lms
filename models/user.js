@@ -14,6 +14,17 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    courses: [
+      {
+        courseName: {
+          type: String,
+          required: true,
+        },
+        progress: {
+          type: Number,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
