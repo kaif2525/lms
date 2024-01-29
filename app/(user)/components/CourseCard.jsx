@@ -8,7 +8,7 @@ import { SmileOutlined } from "@ant-design/icons";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-function CourseCard({ imageUrl, title, description, href }) {
+function CourseCard({ imageUrl, title, description, href, tiles }) {
   const [isEnrolling, setIsEnrolling] = useState(false);
   const [isLoginRequired, setIsLoginRequired] = useState(false);
   const { data: session, status } = useSession();
@@ -105,10 +105,12 @@ function CourseCard({ imageUrl, title, description, href }) {
             <div className="text-[#787b7e] mt-4">{description}</div>
           </div>
 
-          <div className="flex flex-row mt-4 justify-between items-center">
+          <div className={`flex-row mt-4 justify-between items-center flex`}>
             <div className="flex flex-row">
               <div className="bg-[#28292c] rounded-md flex justify-center items-center p-3">
-                <h1 className="text-white ">UI/UX</h1>
+                <h1 className="text-white ">
+                  {description || title.split(" ")[0]}
+                </h1>
               </div>
             </div>
 

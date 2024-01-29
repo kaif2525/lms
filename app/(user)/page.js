@@ -129,9 +129,12 @@ function CourseList({
                 imageSRC = "/DSA in Cpp.png";
                 break;
             }
+            let tiles = description;
+            console.log(tiles);
 
             return (
               <CourseCard
+                tile={tiles}
                 key={index}
                 title={title}
                 description={description}
