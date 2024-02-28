@@ -9,8 +9,7 @@ import Mainscreen from "./components/Mainscreen";
 function CourseDashboard({ params }) {
   const [dataIndex, setDataIndex] = useState([null]);
   const [datadone, setDatadone] = useState(false);
-
-  // Fetch data from the API
+    // Fetch data from the API
   useEffect(() => {
     const fetchData = async () => {
       try {
