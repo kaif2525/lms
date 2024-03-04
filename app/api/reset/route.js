@@ -26,7 +26,7 @@ export async function POST(req) {
         return NextResponse.json({ message: "User password has been updated" }, { status: 200 });
     } catch (error) {
         return NextResponse.json(
-            { message: "There was an error trying to get the user " + error },
+            { error: "There was an error trying to get the user " + error },
             { status: 500 }
         );
     }

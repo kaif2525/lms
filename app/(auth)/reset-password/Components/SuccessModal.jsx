@@ -1,13 +1,13 @@
 import React from 'react'
 
-export default function SuccessModal({ email, close }) {
+export default function SuccessModal({ close }) {
     return (
         <div className='fixed left-0 top-0 w-full h-full  bg-opacity-50 z-50 overflow-auto backdrop-blur flex justify-center items-center bg-card px-2 py-2 text-white'>
             <div>
                 <div className="p-6">
                     <div className="space-y-4">
-                        <h2 className="text-2xl font-bold">Password Reset Email Sent</h2>
-                        <p className="text-sm">Please check your email: {email} for a password reset link</p>
+                        <h2 className="text-2xl font-bold">Password Updated</h2>
+                        <p className="text-sm">Your password has been updated successfully</p>
                     </div>
                 </div>
                 <div>

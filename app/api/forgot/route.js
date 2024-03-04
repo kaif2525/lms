@@ -13,7 +13,7 @@ let mailTransporter = nodemailer.createTransport({
 })
 
 
-const sendResetEmail = async (token, id, email) => {
+const sendResetEmail = async (token, id, email, name) => {
     const url = new URL(`${process.env.NEXTAUTH_URL}/reset-password`)
     url.searchParams.append("id", id)
     url.searchParams.append("token", token)
@@ -22,7 +22,7 @@ const sendResetEmail = async (token, id, email) => {
     let mailDetails = {
         from: "t6643623@gmail.com",
         to: email,
-        subject: "Forgot mail",
+        subject: "Reset Your ---- Password",
         text: `Forgot password Click on this link to reset your password: ${url.toString()}`
     }
 
@@ -43,15 +43,15 @@ const createToken = (user, id) => {
 }
 
 export async function POST(req) {
-    const { email } = await req.json()
-
     try {
+        const { email } = await req.json()
+        console.log({ email })
         await connectMongoDB()
         const user = await User.findOne({ email })
-        const { _id: id } = user
-        if (!id) throw Error("User not registered")
+        if (!user) throw Error("User not registered")
+        const { _id: id, name } = user
         const token = createToken(user, id)
-        await sendResetEmail(token, id, email)
+        await sendResetEmail(token, id, email, name)
         return NextResponse.json({ message: "Email sent" })
     } catch (error) {
         console.log(error)
