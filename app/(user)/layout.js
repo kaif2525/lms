@@ -1,6 +1,5 @@
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import "@/globals.css";
-import SideNavBar from "./components/SideNavBar";
 import { AuthProvider } from "@/app/Providers";
 import PathNameNav from "@/PathnameCheck/PathnameSidenav";
 

@@ -45,9 +45,8 @@ function LoginReg() {
   return (
     <div className="flex flex-row">
       <div
-        className={`sm:flex w-full h-screen hidden bg-black pattern-triangles-gray-500/40 ${
-          ischecked ? "text-white" : "text-blue-700"
-        }`}
+        className={`sm:flex w-full h-screen hidden bg-black pattern-triangles-gray-500/40 ${ischecked ? "text-white" : "text-blue-700"
+          }`}
       >
         <div className="flex flex-col justify-center items-center w-full ">
           <div className="">
@@ -61,17 +60,15 @@ function LoginReg() {
         <div className="flex flex-col items-center justify-center  h-full p-10">
           <div className="flex flex-row justify-between w-full items-center p-1 px-4">
             <h1
-              className={`text-xl pr-2 ${
-                ischecked ? "text-white" : "text-blue-700"
-              }`}
+              className={`text-xl pr-2 ${ischecked ? "text-white" : "text-blue-700"
+                }`}
             >
               Login
             </h1>
             <Switch handleInputChange={handleInputChange} check={ischecked} />
             <h1
-              className={`text-xl pl-2 ${
-                ischecked ? "text-blue-700" : "text-white"
-              }`}
+              className={`text-xl pl-2 ${ischecked ? "text-blue-700" : "text-white"
+                }`}
             >
               Register
             </h1>

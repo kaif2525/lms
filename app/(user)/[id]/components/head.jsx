@@ -25,10 +25,10 @@ function Head({ Course }) {
             <div className="w-10 h-full p-2 mt- rounded-full flex justify-center items-center bg-[#21232b]">
               <Calendar color="gray" />
             </div>
-            <div className="flex flex-col pl-2">
+            {/* <div className="flex flex-col pl-2">
               <h1 className="text-white text-sm">Start Date</h1>
-              <h1 className="text-white text-sm">2021-22-22</h1>
-            </div>
+              <h1 className="text-white text-sm">2024-22-22</h1>
+            </div> */}
           </div>
         </div>
       </div>

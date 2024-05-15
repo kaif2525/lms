@@ -22,7 +22,7 @@ export async function POST(req) {
         const updatedUser = await User.findOneAndUpdate({
             _id: id
         }, { password: hashedPassword });
-        console.log(user)
+
         return NextResponse.json({ message: "User password has been updated" }, { status: 200 });
     } catch (error) {
         return NextResponse.json(
