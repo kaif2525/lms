@@ -51,7 +51,7 @@ function LoginReg() {
         <div className="flex flex-col justify-center items-center w-full ">
           <div className="">
             <h1 className="text-white animate-typing overflow-hidden whitespace-nowrap border-r-4 border-r-white pr-5 text-8xl font-bold">
-              Welcome to -----
+              Welcome to LMS
             </h1>
           </div>
         </div>
